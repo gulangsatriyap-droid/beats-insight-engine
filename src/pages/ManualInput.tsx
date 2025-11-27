@@ -118,10 +118,10 @@ const ManualInput = () => {
           </header>
 
           <div className="p-8">
-            <div className="grid gap-6" style={{ gridTemplateColumns: '19% 27% 27% 27%' }}>
+            <div className="grid grid-cols-12 gap-6">
               {/* Panel 1: Manual Input */}
-              <div>
-                <div className="bg-card border border-border rounded-r-xl rounded-l-none shadow-sm h-[calc(100vh-180px)] flex flex-col overflow-hidden border-l-0">
+              <div className="col-span-3">
+                <div className="bg-card border border-border rounded-xl shadow-sm h-[calc(100vh-180px)] flex flex-col overflow-hidden">
                   <div className="p-5 overflow-y-auto flex-1 scrollbar-thin">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between mb-3">
@@ -260,7 +260,7 @@ const ManualInput = () => {
             </div>
 
             {/* Panel 2: Detail Observasi */}
-            <div>
+            <div className="col-span-3">
               <div className="bg-card border border-border rounded-xl shadow-sm h-[calc(100vh-180px)] flex flex-col overflow-hidden">
                 <div className="p-5 overflow-y-auto flex-1 scrollbar-thin">
                   <DetailObservasiPanel
@@ -272,7 +272,7 @@ const ManualInput = () => {
             </div>
 
             {/* Panel 3: Temuan */}
-            <div>
+            <div className="col-span-3">
               <div className="bg-card border border-border rounded-xl shadow-sm h-[calc(100vh-180px)] flex flex-col overflow-hidden">
                 <div className="p-5 overflow-y-auto flex-1 scrollbar-thin">
                   <TemuanPanel
@@ -284,7 +284,7 @@ const ManualInput = () => {
             </div>
 
             {/* Panel 4: AI Analysis */}
-            <div>
+            <div className="col-span-3">
               <div className="bg-card border border-border rounded-xl shadow-sm h-[calc(100vh-180px)] flex flex-col overflow-hidden">
                 <div className="p-5 overflow-y-auto flex-1 scrollbar-thin">
                   <AnalysisResultPanel
