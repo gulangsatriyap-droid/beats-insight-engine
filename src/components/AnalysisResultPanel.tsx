@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { TrendingUp, ChevronDown, ChevronUp, Loader2, Info } from "lucide-react";
+import { TrendingUp, ChevronDown, ChevronUp, Loader2, Info, FileText } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -14,6 +14,9 @@ import { useState } from "react";
 import { ChainOfThoughtSidebar } from "./ChainOfThoughtSidebar";
 import { ExtractionTab } from "./ExtractionTab";
 import { ConfirmationModal } from "./ConfirmationModal";
+import { FieldConsistencyModal } from "./ValidationModals/FieldConsistencyModal";
+import { DescriptionValidationModal } from "./ValidationModals/DescriptionValidationModal";
+import { ImageRelevanceModal } from "./ValidationModals/ImageRelevanceModal";
 
 interface AnalysisResultPanelProps {
   metadataLoaded: boolean;
@@ -48,6 +51,7 @@ export const AnalysisResultPanel = ({
 }: AnalysisResultPanelProps) => {
   const [isChainOfThoughtOpen, setIsChainOfThoughtOpen] = useState(false);
   const [expandedScores, setExpandedScores] = useState<Record<string, boolean>>({});
+  const [validationModalOpen, setValidationModalOpen] = useState<string | null>(null);
 
   const subScores = [
     {
@@ -241,19 +245,31 @@ export const AnalysisResultPanel = ({
                           <p className="text-xs text-warning font-medium">⚠ {score.negativePoints}</p>
                         </div>
 
-                        <CollapsibleTrigger className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
-                          {expandedScores[score.id] ? (
-                            <>
-                              <ChevronUp className="h-3 w-3" />
-                              <span>Sembunyikan detail</span>
-                            </>
-                          ) : (
-                            <>
-                              <ChevronDown className="h-3 w-3" />
-                              <span>Lihat detail</span>
-                            </>
-                          )}
-                        </CollapsibleTrigger>
+                        <div className="flex items-center gap-2">
+                          <CollapsibleTrigger className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                            {expandedScores[score.id] ? (
+                              <>
+                                <ChevronUp className="h-3 w-3" />
+                                <span>Sembunyikan saran</span>
+                              </>
+                            ) : (
+                              <>
+                                <ChevronDown className="h-3 w-3" />
+                                <span>Detail saran</span>
+                              </>
+                            )}
+                          </CollapsibleTrigger>
+                          
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setValidationModalOpen(score.id)}
+                            className="h-6 px-2 text-xs text-primary hover:text-primary hover:bg-primary/10"
+                          >
+                            <FileText className="h-3 w-3 mr-1" />
+                            Detail Penilaian
+                          </Button>
+                        </div>
 
                         <CollapsibleContent className="space-y-2 pt-2">
                           <div className="bg-success/5 rounded p-2 border-l-2 border-success">
@@ -298,6 +314,20 @@ export const AnalysisResultPanel = ({
         onConfirm={onSaveConfirm}
         title="Simpan hasil analisis ini?"
         description="Setelah data disimpan, hasil analisis akan tersimpan di sistem dan tidak dapat dianalisis ulang lagi. Pastikan hasil analisis sudah sesuai sebelum menyimpan."
+      />
+
+      {/* Validation Detail Modals */}
+      <FieldConsistencyModal
+        isOpen={validationModalOpen === "field-consistency"}
+        onClose={() => setValidationModalOpen(null)}
+      />
+      <DescriptionValidationModal
+        isOpen={validationModalOpen === "description-completeness"}
+        onClose={() => setValidationModalOpen(null)}
+      />
+      <ImageRelevanceModal
+        isOpen={validationModalOpen === "image-relevance"}
+        onClose={() => setValidationModalOpen(null)}
       />
     </div>
   );
