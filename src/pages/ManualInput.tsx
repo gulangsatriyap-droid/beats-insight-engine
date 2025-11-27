@@ -91,7 +91,6 @@ const ManualInput = () => {
   const handleSaveConfirm = () => {
     setShowSaveConfirmation(false);
     setAnalysisState("saved");
-    toast.success("Hasil analisis telah disimpan dan dikunci");
   };
 
   const handleReset = () => {
@@ -124,7 +123,10 @@ const ManualInput = () => {
                   <div className="p-5 overflow-y-auto flex-1 scrollbar-thin">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-sm font-semibold text-foreground">Input Laporan</h3>
+                    <div className="space-y-1">
+                      <h3 className="text-sm font-semibold text-foreground">Input Laporan</h3>
+                      <p className="text-xs text-muted-foreground">Load data dari BEATS Mobile App</p>
+                    </div>
                     <Button
                       variant="ghost"
                       size="sm"
