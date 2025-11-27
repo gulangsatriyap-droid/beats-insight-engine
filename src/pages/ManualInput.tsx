@@ -106,12 +106,14 @@ const ManualInput = () => {
       <AppSidebar />
         
         <div className="flex-1 flex flex-col">
-          <header className="border-b border-border bg-card shadow-sm">
-            <div className="px-8 py-5">
-              <div>
-                <h1 className="text-2xl font-bold text-foreground tracking-tight">BEATS Hazard Reporting System</h1>
-                <p className="text-sm text-muted-foreground mt-1">AI-Powered Safety Analysis & Evaluation</p>
-              </div>
+          <header className="border-b border-border bg-background">
+            <div className="px-8 py-3">
+              <h1 className="text-lg font-semibold text-foreground tracking-tight leading-tight">
+                BEATS Hazard Reporting System
+              </h1>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                AI-Powered Safety Analysis & Evaluation
+              </p>
             </div>
           </header>
 
