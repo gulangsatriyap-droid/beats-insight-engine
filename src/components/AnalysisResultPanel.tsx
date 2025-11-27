@@ -3,7 +3,13 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { TrendingUp, ChevronDown, ChevronUp, Loader2 } from "lucide-react";
+import { TrendingUp, ChevronDown, ChevronUp, Loader2, Info } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useState } from "react";
 import { ChainOfThoughtSidebar } from "./ChainOfThoughtSidebar";
 import { ExtractionTab } from "./ExtractionTab";
@@ -82,13 +88,28 @@ export const AnalysisResultPanel = ({
       {/* Fixed Header */}
       <div className="flex-shrink-0 space-y-4 pb-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <h3 className="text-sm font-semibold text-foreground">AI Analysis</h3>
-            {isSaved && (
-              <Badge variant="secondary" className="text-xs bg-success/20 text-success border-success/30">
-                Locked
-              </Badge>
-            )}
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-foreground">AI Analysis</h3>
+              {isSaved && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div className="flex items-center gap-1.5 cursor-help">
+                        <Badge variant="secondary" className="text-xs bg-success/20 text-success border-success/30">
+                          Locked
+                        </Badge>
+                        <Info className="h-3.5 w-3.5 text-success" />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent side="right" className="max-w-xs">
+                      <p className="text-xs">Hasil analisis telah disimpan dan tidak dapat diubah lagi</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+            </div>
+            <p className="text-xs text-muted-foreground">Skor kualitas dan ekstraksi metadata</p>
           </div>
           {hasAnalysis && (
             <Button
@@ -166,14 +187,6 @@ export const AnalysisResultPanel = ({
                 </div>
                 <p className="text-xs text-muted-foreground bg-muted/50 border border-border rounded p-2">
                   Re-analyze untuk analisa ulang. Hasil sebelumnya akan digantikan.
-                </p>
-              </div>
-            )}
-
-            {isSaved && (
-              <div className="bg-success/10 border border-success/30 rounded-lg p-4 text-center mb-4">
-                <p className="text-xs text-success font-medium">
-                  ✓ Hasil analisis telah disimpan. Analisis tidak dapat diubah lagi.
                 </p>
               </div>
             )}

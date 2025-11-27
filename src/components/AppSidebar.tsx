@@ -13,11 +13,11 @@ import {
 
 export const AppSidebar = () => {
   return (
-    <div className="w-16 border-r bg-background flex flex-col items-center py-6 gap-6">
+    <div className="w-16 border-r bg-background flex flex-col items-center py-6">
       {/* Logo */}
-      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/60 shadow-lg">
         <svg
-          className="h-6 w-6 text-primary"
+          className="h-7 w-7 text-primary-foreground"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -36,13 +36,16 @@ export const AppSidebar = () => {
         </svg>
       </div>
 
+      {/* Separator */}
+      <div className="w-8 h-px bg-border my-2" />
+
       {/* Menu Items */}
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-3">
         <TooltipProvider>
           {/* Modul Pelapor - Active */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+              <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 transition-all">
                 <FileText className="h-5 w-5" />
               </button>
             </TooltipTrigger>
@@ -53,13 +56,10 @@ export const AppSidebar = () => {
             </TooltipContent>
           </Tooltip>
 
-          {/* Modul Evaluator - Disabled */}
-          <HoverCard>
+          {/* Modul Evaluator - Coming Soon */}
+          <HoverCard openDelay={0}>
             <HoverCardTrigger asChild>
-              <button
-                disabled
-                className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground opacity-50 cursor-not-allowed"
-              >
+              <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted/50 text-muted-foreground hover:bg-muted transition-colors">
                 <Settings className="h-5 w-5" />
               </button>
             </HoverCardTrigger>
