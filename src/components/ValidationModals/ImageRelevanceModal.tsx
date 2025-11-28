@@ -33,6 +33,36 @@ export const ImageRelevanceModal = ({ isOpen, onClose }: ImageRelevanceModalProp
             </div>
           </div>
 
+          {/* Detail Saran */}
+          <div className="space-y-3">
+            <h4 className="text-sm font-semibold">Detail Saran</h4>
+            
+            {/* Positive Point */}
+            <div className="bg-success/10 rounded-lg p-3 border border-success/20 animate-fade-in">
+              <p className="text-xs text-success font-medium mb-2">✓ Gambar Sangat Relevan & Informatif</p>
+              <div className="bg-success/5 rounded p-2 border-l-2 border-success">
+                <p className="text-xs text-foreground leading-relaxed">
+                  Semua objek yang disebutkan dalam deskripsi (pekerja, helm rusak, dump truck) terlihat jelas di gambar. 
+                  Traffic control dan infrastructure juga sesuai dengan konteks area pit loading. Komposisi foto baik dengan 
+                  fokus jelas pada hazard utama (helm rusak), lighting memadai, dan skala objek mudah dipahami. 
+                  Tools observasi konsisten antara field input (Visual inspection) dan source gambar (smartphone camera).
+                </p>
+              </div>
+            </div>
+            
+            {/* Negative Point */}
+            <div className="bg-warning/10 rounded-lg p-3 border border-warning/20 animate-fade-in">
+              <p className="text-xs text-warning font-medium mb-2">⚠ Angle Foto Bisa Lebih Optimal</p>
+              <div className="bg-warning/5 rounded p-2 border-l-2 border-warning">
+                <p className="text-xs text-foreground leading-relaxed">
+                  Untuk dokumentasi yang lebih komprehensif, pertimbangkan pengambilan foto dari sudut yang lebih dekat 
+                  untuk menampilkan detail kerusakan helm secara close-up, plus satu foto wide-angle untuk menunjukkan 
+                  konteks keseluruhan area kerja. Ini akan membantu investigasi lebih detail.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Validasi Image Extraction vs Deskripsi */}
           <div className="space-y-3">
             <h4 className="text-sm font-semibold">Validasi Image Extraction vs Deskripsi</h4>

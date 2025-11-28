@@ -33,6 +33,35 @@ export const DescriptionValidationModal = ({ isOpen, onClose }: DescriptionValid
             </div>
           </div>
 
+          {/* Detail Saran */}
+          <div className="space-y-3">
+            <h4 className="text-sm font-semibold">Detail Saran</h4>
+            
+            {/* Positive Point */}
+            <div className="bg-success/10 rounded-lg p-3 border border-success/20 animate-fade-in">
+              <p className="text-xs text-success font-medium mb-2">✓ Deskripsi Hazard Jelas</p>
+              <div className="bg-success/5 rounded p-2 border-l-2 border-success">
+                <p className="text-xs text-foreground leading-relaxed">
+                  Aspek WHAT, WHEN, WHERE, WHY, dan HOW sudah dijelaskan dengan baik. Detail kondisi kerusakan helm 
+                  (retakan 5cm pada cangkang luar) sangat spesifik dan memudahkan assessment risiko. Waktu kejadian 
+                  tercatat dari metadata, dan konteks risiko tersirat dari aktivitas loading di area pit.
+                </p>
+              </div>
+            </div>
+            
+            {/* Negative Point */}
+            <div className="bg-warning/10 rounded-lg p-3 border border-warning/20 animate-fade-in">
+              <p className="text-xs text-warning font-medium mb-2">⚠ Identitas Pekerja Tidak Lengkap</p>
+              <div className="bg-warning/5 rounded p-2 border-l-2 border-warning">
+                <p className="text-xs text-foreground leading-relaxed">
+                  Aspek WHO masih kurang detail - sebaiknya tambahkan identitas atau tim pekerja yang terdampak 
+                  (misalnya "Operator Loading PT XYZ, Tim A") dan jumlah pekerja terdampak untuk keperluan 
+                  investigasi dan follow-up yang lebih efektif.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Validasi 5W 1H */}
           <div className="space-y-3">
             <h4 className="text-sm font-semibold">Validasi 5W 1H</h4>
