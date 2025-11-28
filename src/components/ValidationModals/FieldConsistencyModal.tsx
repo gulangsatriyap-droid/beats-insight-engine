@@ -33,6 +33,35 @@ export const FieldConsistencyModal = ({ isOpen, onClose }: FieldConsistencyModal
             </div>
           </div>
 
+          {/* Detail Saran */}
+          <div className="space-y-3">
+            <h4 className="text-sm font-semibold">Detail Saran</h4>
+            
+            {/* Positive Point */}
+            <div className="bg-success/10 rounded-lg p-3 border border-success/20 animate-fade-in">
+              <p className="text-xs text-success font-medium mb-2">✓ Konsistensi Data Baik</p>
+              <div className="bg-success/5 rounded p-2 border-l-2 border-success">
+                <p className="text-xs text-foreground leading-relaxed">
+                  Detail lokasi dan tools pengamatan sudah konsisten antara field input dan image extraction. 
+                  Kategori ketidaksesuaian (Road management) sesuai dengan konteks observasi di area pit, 
+                  dan subketidaksesuaian (PPE - Helm Safety Rusak) terlihat jelas di gambar dengan deskripsi yang akurat.
+                </p>
+              </div>
+            </div>
+            
+            {/* Negative Point */}
+            <div className="bg-warning/10 rounded-lg p-3 border border-warning/20 animate-fade-in">
+              <p className="text-xs text-warning font-medium mb-2">⚠ Perlu Detail Tambahan</p>
+              <div className="bg-warning/5 rounded p-2 border-l-2 border-warning">
+                <p className="text-xs text-foreground leading-relaxed">
+                  Sebaiknya tambahkan informasi jarak dari referensi landmark (misalnya "50m dari crusher plant") 
+                  dan timestamp verifikasi untuk meningkatkan akurasi lokasi. Detail ini akan membantu tim follow-up 
+                  menemukan lokasi hazard dengan lebih cepat dan tepat.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Validasi Detail Laporan */}
           <div className="space-y-3">
             <h4 className="text-sm font-semibold">Validasi Detail Laporan</h4>
