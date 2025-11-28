@@ -1,9 +1,9 @@
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, AlertCircle, Image as ImageIcon } from "lucide-react";
 
@@ -14,11 +14,11 @@ interface ImageRelevanceModalProps {
 
 export const ImageRelevanceModal = ({ isOpen, onClose }: ImageRelevanceModalProps) => {
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-lg">Detail Penilaian - Image Relevance</DialogTitle>
-        </DialogHeader>
+    <Sheet open={isOpen} onOpenChange={onClose}>
+      <SheetContent side="right" className="w-full sm:max-w-2xl overflow-y-auto">
+        <SheetHeader>
+          <SheetTitle className="text-lg">Detail Penilaian - Image Relevance</SheetTitle>
+        </SheetHeader>
 
         <div className="space-y-6 py-4">
           {/* Score Overview */}
@@ -198,7 +198,7 @@ export const ImageRelevanceModal = ({ isOpen, onClose }: ImageRelevanceModalProp
             </div>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   );
 };

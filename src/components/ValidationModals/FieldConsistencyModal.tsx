@@ -1,9 +1,9 @@
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 
@@ -14,11 +14,11 @@ interface FieldConsistencyModalProps {
 
 export const FieldConsistencyModal = ({ isOpen, onClose }: FieldConsistencyModalProps) => {
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-lg">Detail Penilaian - Field Consistency</DialogTitle>
-        </DialogHeader>
+    <Sheet open={isOpen} onOpenChange={onClose}>
+      <SheetContent side="right" className="w-full sm:max-w-2xl overflow-y-auto">
+        <SheetHeader>
+          <SheetTitle className="text-lg">Detail Penilaian - Field Consistency</SheetTitle>
+        </SheetHeader>
 
         <div className="space-y-6 py-4">
           {/* Score Overview */}
@@ -121,7 +121,7 @@ export const FieldConsistencyModal = ({ isOpen, onClose }: FieldConsistencyModal
             </div>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   );
 };
