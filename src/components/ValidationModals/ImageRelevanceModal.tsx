@@ -35,14 +35,11 @@ export const ImageRelevanceModal = ({ isOpen, onClose }: ImageRelevanceModalProp
 
           {/* Validasi Image Extraction vs Deskripsi */}
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold flex items-center gap-2">
-              <ImageIcon className="h-4 w-4 text-primary" />
-              Validasi Image Extraction vs Deskripsi
-            </h4>
+            <h4 className="text-sm font-semibold">Validasi Image Extraction vs Deskripsi</h4>
             
             <div className="space-y-3">
               {/* People */}
-              <div className="border border-border rounded-lg p-3">
+              <div className="border border-border rounded-lg p-3 bg-success/5">
                 <div className="flex items-start gap-2 mb-2">
                   <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
                   <p className="text-xs font-semibold">People</p>
@@ -54,7 +51,7 @@ export const ImageRelevanceModal = ({ isOpen, onClose }: ImageRelevanceModalProp
                   <p className="text-xs text-muted-foreground">
                     <span className="font-medium">Image Extraction:</span> Terdeteksi 1 pekerja dengan PPE (helm rusak)
                   </p>
-                  <p className="text-xs text-success">✓ Objek pekerja konsisten antara deskripsi dan gambar</p>
+                  <p className="text-xs text-success font-medium">✓ Objek pekerja konsisten antara deskripsi dan gambar</p>
                 </div>
               </div>
 
@@ -72,6 +69,40 @@ export const ImageRelevanceModal = ({ isOpen, onClose }: ImageRelevanceModalProp
                     <span className="font-medium">Image Extraction:</span> Terdeteksi dump truck di background
                   </p>
                   <p className="text-xs text-success">✓ Kendaraan yang disebutkan terlihat di gambar</p>
+                </div>
+              </div>
+
+              {/* Traffic Control */}
+              <div className="border border-border rounded-lg p-3 bg-success/5">
+                <div className="flex items-start gap-2 mb-2">
+                  <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
+                  <p className="text-xs font-semibold">Traffic Control</p>
+                </div>
+                <div className="pl-6 space-y-1">
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium">Deskripsi:</span> "...aktivitas loading di pit area"
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium">Image Extraction:</span> Terdeteksi rambu/marking area kerja di sekitar lokasi
+                  </p>
+                  <p className="text-xs text-success font-medium">✓ Traffic control sesuai dengan aktivitas yang dilaporkan</p>
+                </div>
+              </div>
+
+              {/* Infrastructure & Access */}
+              <div className="border border-border rounded-lg p-3">
+                <div className="flex items-start gap-2 mb-2">
+                  <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
+                  <p className="text-xs font-semibold">Infrastructure & Access</p>
+                </div>
+                <div className="pl-6 space-y-1">
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium">Deskripsi:</span> "...area loading Pit 3"
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium">Image Extraction:</span> Terlihat jalan akses dan area pit yang terbuka
+                  </p>
+                  <p className="text-xs text-success">✓ Infrastruktur sesuai dengan lokasi yang disebutkan</p>
                 </div>
               </div>
 
@@ -110,13 +141,14 @@ export const ImageRelevanceModal = ({ isOpen, onClose }: ImageRelevanceModalProp
 
           {/* Validasi Tools Pengamatan */}
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-success" />
-              Validasi Tools Pengamatan
-            </h4>
+            <h4 className="text-sm font-semibold">Validasi Tools Pengamatan</h4>
             
             <div className="border border-border rounded-lg p-3">
-              <div className="pl-2 space-y-1">
+              <div className="flex items-start gap-2 mb-2">
+                <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
+                <p className="text-xs font-semibold">Tools Observasi</p>
+              </div>
+              <div className="pl-6 space-y-1">
                 <p className="text-xs text-muted-foreground">
                   <span className="font-medium">Field:</span> "Visual inspection"
                 </p>
@@ -128,63 +160,36 @@ export const ImageRelevanceModal = ({ isOpen, onClose }: ImageRelevanceModalProp
             </div>
           </div>
 
-          {/* Validasi Objek & Informasi */}
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold">Validasi Objek & Informasi</h4>
-            
-            <div className="space-y-2">
-              <div className="flex items-start gap-2 p-2 bg-success/10 rounded border-l-2 border-success">
-                <CheckCircle2 className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-xs font-medium">Objek di deskripsi muncul di gambar</p>
-                  <p className="text-xs text-muted-foreground">Pekerja, helm rusak, dump truck - semua terlihat jelas</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2 p-2 bg-warning/10 rounded border-l-2 border-warning">
-                <AlertCircle className="h-4 w-4 text-warning mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-xs font-medium">Objek di gambar tidak disebutkan</p>
-                  <p className="text-xs text-muted-foreground">Material stockpile terlihat di background namun tidak disebutkan dalam deskripsi</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2 p-2 bg-success/10 rounded border-l-2 border-success">
-                <CheckCircle2 className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-xs font-medium">Tidak ada informasi kontradiktif</p>
-                  <p className="text-xs text-muted-foreground">Semua informasi dalam deskripsi sesuai dengan visual gambar</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Detail Scoring */}
           <div className="space-y-3 bg-muted/30 p-4 rounded-lg">
             <h4 className="text-sm font-semibold">Detail Scoring</h4>
             <div className="space-y-2 text-xs">
               <div className="flex justify-between">
                 <span>Objek utama (people) konsisten</span>
-                <span className="font-medium text-success">+25</span>
+                <span className="font-medium text-success">+20</span>
               </div>
               <div className="flex justify-between">
                 <span>Kendaraan (vehicles) terlihat</span>
-                <span className="font-medium text-success">+20</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Lingkungan (environment) sesuai</span>
-                <span className="font-medium text-success">+20</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Komposisi foto baik</span>
                 <span className="font-medium text-success">+15</span>
               </div>
               <div className="flex justify-between">
-                <span>Tools observasi konsisten</span>
+                <span>Traffic control sesuai konteks</span>
+                <span className="font-medium text-success">+15</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Infrastructure & access jelas</span>
+                <span className="font-medium text-success">+15</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Lingkungan (environment) sesuai</span>
+                <span className="font-medium text-success">+15</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Komposisi foto baik</span>
                 <span className="font-medium text-success">+10</span>
               </div>
               <div className="flex justify-between">
-                <span>Tidak ada kontradiksi</span>
+                <span>Tools observasi konsisten</span>
                 <span className="font-medium text-success">+10</span>
               </div>
               <div className="flex justify-between border-t border-border pt-2">

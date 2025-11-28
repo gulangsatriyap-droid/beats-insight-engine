@@ -39,7 +39,7 @@ export const DescriptionValidationModal = ({ isOpen, onClose }: DescriptionValid
             
             <div className="space-y-3">
               {/* WHAT */}
-              <div className="border border-border rounded-lg p-3">
+              <div className="border border-border rounded-lg p-3 bg-success/5">
                 <div className="flex items-start gap-2 mb-2">
                   <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
                   <p className="text-xs font-semibold">WHAT (Apa yang terjadi?)</p>
@@ -49,7 +49,7 @@ export const DescriptionValidationModal = ({ isOpen, onClose }: DescriptionValid
                     "Ditemukan pekerja di area pit yang tidak menggunakan helm safety standar. 
                     Helm yang digunakan sudah mengalami kerusakan pada bagian cangkang luar dengan retakan sepanjang 5cm."
                   </p>
-                  <p className="text-xs text-success">✓ Deskripsi hazard jelas dan spesifik</p>
+                  <p className="text-xs text-success font-medium">✓ Deskripsi hazard jelas dan spesifik</p>
                 </div>
               </div>
 
@@ -106,14 +106,14 @@ export const DescriptionValidationModal = ({ isOpen, onClose }: DescriptionValid
               </div>
 
               {/* HOW */}
-              <div className="border border-border rounded-lg p-3">
+              <div className="border border-border rounded-lg p-3 bg-success/5">
                 <div className="flex items-start gap-2 mb-2">
                   <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
                   <p className="text-xs font-semibold">HOW (Bagaimana kondisinya?)</p>
                 </div>
                 <div className="pl-6 space-y-1">
                   <p className="text-xs text-muted-foreground">"retakan sepanjang 5cm pada cangkang luar"</p>
-                  <p className="text-xs text-success">✓ Detail kondisi kerusakan jelas</p>
+                  <p className="text-xs text-success font-medium">✓ Detail kondisi kerusakan jelas</p>
                 </div>
               </div>
             </div>
