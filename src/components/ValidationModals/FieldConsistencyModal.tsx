@@ -35,57 +35,93 @@ export const FieldConsistencyModal = ({ isOpen, onClose }: FieldConsistencyModal
 
           {/* Validasi Detail Laporan */}
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-success" />
-              Validasi Detail Laporan
-            </h4>
+            <h4 className="text-sm font-semibold">Validasi Detail Laporan</h4>
             
-            <div className="space-y-3 pl-6">
-              <div className="border-l-2 border-success pl-4 py-2">
-                <p className="text-xs font-medium text-success mb-1">✓ Tools Pengamatan</p>
-                <p className="text-xs text-muted-foreground">Field: "Visual inspection"</p>
-                <p className="text-xs text-muted-foreground">Image Extraction: Terdeteksi kamera/smartphone pada foto</p>
+            <div className="space-y-3">
+              {/* Tools Pengamatan */}
+              <div className="border border-border rounded-lg p-3">
+                <div className="flex items-start gap-2 mb-2">
+                  <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
+                  <p className="text-xs font-semibold">Tools Pengamatan</p>
+                </div>
+                <div className="pl-6 space-y-1">
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium">Field:</span> "Visual inspection"
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium">Image Extraction:</span> Terdeteksi kamera/smartphone pada foto
+                  </p>
+                  <p className="text-xs text-success">✓ Metode observasi konsisten</p>
+                </div>
               </div>
 
-              <div className="border-l-2 border-success pl-4 py-2">
-                <p className="text-xs font-medium text-success mb-1">✓ Detail Lokasi</p>
-                <p className="text-xs text-muted-foreground">Field: "Pit 3, Area Loading"</p>
-                <p className="text-xs text-muted-foreground">Image Extraction: Background menunjukkan pit area dengan truck loading</p>
-              </div>
-
-              <div className="border-l-2 border-warning pl-4 py-2">
-                <p className="text-xs font-medium text-warning mb-1">⚠ Zona Kerja Spesifik</p>
-                <p className="text-xs text-muted-foreground">Field: Tidak disebutkan</p>
-                <p className="text-xs text-muted-foreground">Rekomendasi: Tambahkan zona kerja spesifik (e.g., "Pit 3 - Sector A")</p>
+              {/* Detail Lokasi */}
+              <div className="border border-border rounded-lg p-3 bg-success/5">
+                <div className="flex items-start gap-2 mb-2">
+                  <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
+                  <p className="text-xs font-semibold">Detail Lokasi</p>
+                </div>
+                <div className="pl-6 space-y-1">
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium">Field:</span> "Pit 3, Area Loading"
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium">Image Extraction:</span> Background menunjukkan pit area dengan truck loading
+                  </p>
+                  <p className="text-xs text-success font-medium">✓ Lokasi konsisten antara field dan visual</p>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Validasi Ketidaksesuaian */}
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold flex items-center gap-2">
-              <AlertCircle className="h-4 w-4 text-warning" />
-              Validasi Ketidaksesuaian
-            </h4>
+            <h4 className="text-sm font-semibold">Validasi Ketidaksesuaian</h4>
             
-            <div className="space-y-3 pl-6">
-              <div className="border-l-2 border-success pl-4 py-2">
-                <p className="text-xs font-medium mb-1">Ketidaksesuaian</p>
-                <p className="text-xs text-muted-foreground">Deskripsi: "Road management"</p>
-                <p className="text-xs text-success">✓ Sesuai dengan konteks observasi di area pit</p>
+            <div className="space-y-3">
+              {/* Ketidaksesuaian */}
+              <div className="border border-border rounded-lg p-3">
+                <div className="flex items-start gap-2 mb-2">
+                  <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
+                  <p className="text-xs font-semibold">Ketidaksesuaian</p>
+                </div>
+                <div className="pl-6 space-y-1">
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium">Deskripsi:</span> "Road management"
+                  </p>
+                  <p className="text-xs text-success">✓ Sesuai dengan konteks observasi di area pit</p>
+                </div>
               </div>
 
-              <div className="border-l-2 border-success pl-4 py-2">
-                <p className="text-xs font-medium mb-1">Subketidaksesuaian</p>
-                <p className="text-xs text-muted-foreground">Deskripsi: "PPE - Helm Safety Rusak"</p>
-                <p className="text-xs text-muted-foreground">Image: Terlihat helm dengan kondisi retak/rusak</p>
-                <p className="text-xs text-success">✓ Konsisten antara deskripsi dan visual</p>
+              {/* Subketidaksesuaian */}
+              <div className="border border-border rounded-lg p-3 bg-success/5">
+                <div className="flex items-start gap-2 mb-2">
+                  <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
+                  <p className="text-xs font-semibold">Subketidaksesuaian</p>
+                </div>
+                <div className="pl-6 space-y-1">
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium">Deskripsi:</span> "PPE - Helm Safety Rusak"
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium">Image:</span> Terlihat helm dengan kondisi retak/rusak
+                  </p>
+                  <p className="text-xs text-success font-medium">✓ Konsisten antara deskripsi dan visual</p>
+                </div>
               </div>
 
-              <div className="border-l-2 border-success pl-4 py-2">
-                <p className="text-xs font-medium mb-1">Quick Action</p>
-                <p className="text-xs text-muted-foreground">Deskripsi: "Ganti helm safety baru, stop work sampai PPE lengkap"</p>
-                <p className="text-xs text-success">✓ Tindakan relevan dengan temuan</p>
+              {/* Quick Action */}
+              <div className="border border-border rounded-lg p-3">
+                <div className="flex items-start gap-2 mb-2">
+                  <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
+                  <p className="text-xs font-semibold">Quick Action</p>
+                </div>
+                <div className="pl-6 space-y-1">
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium">Deskripsi:</span> "Ganti helm safety baru, stop work sampai PPE lengkap"
+                  </p>
+                  <p className="text-xs text-success">✓ Tindakan relevan dengan temuan</p>
+                </div>
               </div>
             </div>
           </div>
@@ -107,11 +143,11 @@ export const FieldConsistencyModal = ({ isOpen, onClose }: FieldConsistencyModal
                 <span className="font-medium text-success">+25</span>
               </div>
               <div className="flex justify-between border-t border-border pt-2">
-                <span>Zona kerja spesifik tidak disebutkan</span>
+                <span>Detail jarak dari referensi tidak disebutkan</span>
                 <span className="font-medium text-warning">-15</span>
               </div>
               <div className="flex justify-between">
-                <span>Jarak dari referensi tidak disebutkan</span>
+                <span>Timestamp verifikasi tidak tercatat</span>
                 <span className="font-medium text-warning">-15</span>
               </div>
               <div className="flex justify-between border-t border-border pt-2 mt-2 font-semibold">
