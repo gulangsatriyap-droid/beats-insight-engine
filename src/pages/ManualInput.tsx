@@ -4,10 +4,12 @@ import { DetailObservasiPanel } from "@/components/DetailObservasiPanel";
 import { TemuanPanel } from "@/components/TemuanPanel";
 import { AnalysisResultPanel } from "@/components/AnalysisResultPanel";
 import { AppSidebar } from "@/components/AppSidebar";
+import { VersionControlPanel, APP_VERSION } from "@/components/VersionControlPanel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Loader2, FileText, AlertCircle, RotateCcw } from "lucide-react";
 
 type AnalysisState = "none" | "analyzing" | "complete" | "saved";
@@ -107,13 +109,21 @@ const ManualInput = () => {
         
         <div className="flex-1 flex flex-col">
           <header className="border-b border-border bg-background">
-            <div className="px-8 py-3">
-              <h1 className="text-lg font-semibold text-foreground tracking-tight leading-tight">
-                BEATS Hazard Reporting System
-              </h1>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                AI-Powered Safety Analysis & Evaluation
-              </p>
+            <div className="px-8 py-3 flex items-center justify-between">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h1 className="text-lg font-semibold text-foreground tracking-tight leading-tight">
+                    BEATS Hazard Reporting System
+                  </h1>
+                  <Badge variant="secondary" className="text-[10px] h-5 px-1.5 font-mono">
+                    Form Checker {APP_VERSION}
+                  </Badge>
+                </div>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  AI-Powered Safety Analysis & Evaluation
+                </p>
+              </div>
+              <VersionControlPanel />
             </div>
           </header>
 
