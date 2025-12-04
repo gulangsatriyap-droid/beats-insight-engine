@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Copy, ChevronDown, ChevronRight, Image, Layers, Users, Car, TreePine } from "lucide-react";
+import { Copy, ChevronDown, ChevronRight, Image, Layers, Users, Car, TreePine, TrafficCone, Building } from "lucide-react";
 import { toast } from "sonner";
 
 const extractionData = {
@@ -295,18 +295,10 @@ const PPESection = ({ data }: { data: typeof extractionData.people_ppe }) => {
   );
 };
 
-// Combined Vehicles/Traffic/Access section
-const VehiclesTrafficAccessSection = ({ 
-  vehicles, 
-  trafficControl, 
-  accessInfra 
-}: { 
-  vehicles: any[]; 
-  trafficControl: any[]; 
-  accessInfra: any[];
-}) => {
+// Vehicles Section with special rendering for vehicle objects
+const VehiclesSection = ({ vehicles }: { vehicles: any[] }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const isEmpty = vehicles.length === 0 && trafficControl.length === 0 && accessInfra.length === 0;
+  const isEmpty = vehicles.length === 0;
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -316,7 +308,7 @@ const VehiclesTrafficAccessSection = ({
             <div className="p-1.5 bg-primary/10 rounded">
               <Car className="h-4 w-4 text-primary" />
             </div>
-            <span className="text-sm font-medium text-foreground">Vehicles / Traffic Control / Access Infra</span>
+            <span className="text-sm font-medium text-foreground">Vehicles</span>
             {isEmpty && (
               <span className="text-xs text-muted-foreground italic">(tidak ada data)</span>
             )}
@@ -329,54 +321,118 @@ const VehiclesTrafficAccessSection = ({
         </div>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className="p-4 border border-t-0 border-border rounded-b-lg bg-card space-y-4">
-          {/* Vehicles */}
-          <div>
-            <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Vehicles</h5>
-            {vehicles.length === 0 ? (
-              <p className="text-xs text-muted-foreground italic">Tidak ada kendaraan terdeteksi</p>
-            ) : (
-              <div className="space-y-2">
-                {vehicles.map((v, idx) => (
-                  <div key={idx} className="p-2 bg-muted/30 rounded text-xs">
-                    {typeof v === 'object' ? JSON.stringify(v) : String(v)}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+        <div className="p-4 border border-t-0 border-border rounded-b-lg bg-card">
+          {isEmpty ? (
+            <p className="text-xs text-muted-foreground italic text-center py-4">Tidak ada kendaraan terdeteksi</p>
+          ) : (
+            <div className="space-y-3">
+              {vehicles.map((v, idx) => (
+                <div key={idx} className="p-3 bg-muted/30 rounded-lg border border-border/50">
+                  {typeof v === 'object' ? (
+                    <div className="space-y-0">
+                      <KeyValueRow label="Type" value={v.type} />
+                      <KeyValueRow label="Attributes" value={v.attributes} />
+                      <KeyValueRow label="Position" value={v.position} />
+                      <KeyValueRow label="Operation Status" value={v.operation_status} />
+                      <KeyValueRow label="Inter Unit Distance" value={v.inter_unit_distance} />
+                    </div>
+                  ) : (
+                    <span className="text-xs text-foreground">{String(v)}</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  );
+};
 
-          {/* Traffic Control */}
-          <div>
-            <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Traffic Control</h5>
-            {trafficControl.length === 0 ? (
-              <p className="text-xs text-muted-foreground italic">Tidak ada traffic control terdeteksi</p>
-            ) : (
-              <div className="space-y-2">
-                {trafficControl.map((t, idx) => (
-                  <div key={idx} className="p-2 bg-muted/30 rounded text-xs">
-                    {typeof t === 'object' ? JSON.stringify(t) : String(t)}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+// Traffic Control Section
+const TrafficControlSection = ({ trafficControl }: { trafficControl: any[] }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const isEmpty = trafficControl.length === 0;
 
-          {/* Access Infrastructure */}
-          <div>
-            <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Access Infrastructure</h5>
-            {accessInfra.length === 0 ? (
-              <p className="text-xs text-muted-foreground italic">Tidak ada access infrastructure terdeteksi</p>
-            ) : (
-              <div className="space-y-2">
-                {accessInfra.map((a, idx) => (
-                  <div key={idx} className="p-2 bg-muted/30 rounded text-xs">
-                    {typeof a === 'object' ? JSON.stringify(a) : String(a)}
-                  </div>
-                ))}
-              </div>
+  return (
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <CollapsibleTrigger className="w-full">
+        <div className="flex items-center justify-between p-3 bg-muted/50 hover:bg-muted/70 rounded-lg transition-colors">
+          <div className="flex items-center gap-3">
+            <div className="p-1.5 bg-primary/10 rounded">
+              <TrafficCone className="h-4 w-4 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-foreground">Traffic Control</span>
+            {isEmpty && (
+              <span className="text-xs text-muted-foreground italic">(tidak ada data)</span>
             )}
           </div>
+          {isOpen ? (
+            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+          ) : (
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          )}
+        </div>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className="p-4 border border-t-0 border-border rounded-b-lg bg-card">
+          {isEmpty ? (
+            <p className="text-xs text-muted-foreground italic text-center py-4">Tidak ada traffic control terdeteksi</p>
+          ) : (
+            <ul className="space-y-2">
+              {trafficControl.map((t, idx) => (
+                <li key={idx} className="text-xs text-foreground flex items-start gap-2 p-2 bg-muted/30 rounded">
+                  <span className="text-muted-foreground">•</span>
+                  <span>{typeof t === 'object' ? JSON.stringify(t) : String(t)}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  );
+};
+
+// Access Infrastructure Section
+const AccessInfraSection = ({ accessInfra }: { accessInfra: any[] }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const isEmpty = accessInfra.length === 0;
+
+  return (
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <CollapsibleTrigger className="w-full">
+        <div className="flex items-center justify-between p-3 bg-muted/50 hover:bg-muted/70 rounded-lg transition-colors">
+          <div className="flex items-center gap-3">
+            <div className="p-1.5 bg-primary/10 rounded">
+              <Building className="h-4 w-4 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-foreground">Access Infrastructure</span>
+            {isEmpty && (
+              <span className="text-xs text-muted-foreground italic">(tidak ada data)</span>
+            )}
+          </div>
+          {isOpen ? (
+            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+          ) : (
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          )}
+        </div>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className="p-4 border border-t-0 border-border rounded-b-lg bg-card">
+          {isEmpty ? (
+            <p className="text-xs text-muted-foreground italic text-center py-4">Tidak ada access infrastructure terdeteksi</p>
+          ) : (
+            <ul className="space-y-2">
+              {accessInfra.map((a, idx) => (
+                <li key={idx} className="text-xs text-foreground flex items-start gap-2 p-2 bg-muted/30 rounded">
+                  <span className="text-muted-foreground">•</span>
+                  <span>{typeof a === 'object' ? JSON.stringify(a) : String(a)}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </CollapsibleContent>
     </Collapsible>
@@ -436,12 +492,14 @@ export const ExtractionTab = () => {
             {/* People & PPE - Special rendering */}
             <PPESection data={extractionData.people_ppe} />
 
-            {/* Vehicles / Traffic Control / Access Infra - Combined */}
-            <VehiclesTrafficAccessSection 
-              vehicles={extractionData.vehicles}
-              trafficControl={extractionData.traffic_control}
-              accessInfra={extractionData.access_infra}
-            />
+            {/* Vehicles */}
+            <VehiclesSection vehicles={extractionData.vehicles} />
+
+            {/* Traffic Control */}
+            <TrafficControlSection trafficControl={extractionData.traffic_control} />
+
+            {/* Access Infrastructure */}
+            <AccessInfraSection accessInfra={extractionData.access_infra} />
 
             {/* Environment */}
             <CollapsibleSection 
