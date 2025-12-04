@@ -216,7 +216,7 @@ const CollapsibleSection = ({
 
 // PPE Equipment section with special rendering
 const PPESection = ({ data }: { data: typeof extractionData.people_ppe }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -478,7 +478,7 @@ export const ExtractionTab = () => {
               title="Image Properties" 
               icon={Image} 
               data={extractionData.image_properties}
-              defaultOpen={true}
+              defaultOpen={false}
             />
 
             {/* Composition */}
@@ -486,7 +486,7 @@ export const ExtractionTab = () => {
               title="Composition" 
               icon={Layers} 
               data={extractionData.composition}
-              defaultOpen={true}
+              defaultOpen={false}
             />
 
             {/* People & PPE - Special rendering */}
