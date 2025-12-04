@@ -81,9 +81,43 @@ const extractionData = {
     "people_relationships": ["person working alone"],
     "hazard_potential": ["struck by hammer", "struck by chisel", "falling objects"]
   },
-  "vehicles": [],
-  "traffic_control": [],
-  "access_infra": [],
+  "vehicles": [
+    {
+      "type": "Dump Truck",
+      "attributes": ["HD785-7", "Yellow", "100 Ton Capacity"],
+      "position": "Hauling Road - Pit 3",
+      "operation_status": "Operating",
+      "inter_unit_distance": "50 meters"
+    },
+    {
+      "type": "Excavator",
+      "attributes": ["PC2000-8", "Yellow", "20m³ Bucket"],
+      "position": "Loading Point - Pit 3",
+      "operation_status": "Loading",
+      "inter_unit_distance": "15 meters"
+    },
+    {
+      "type": "Light Vehicle",
+      "attributes": ["Toyota Hilux", "White", "Supervision"],
+      "position": "Pit Access Road",
+      "operation_status": "Parked",
+      "inter_unit_distance": "100 meters"
+    }
+  ],
+  "traffic_control": [
+    "Speed limit sign - 40 km/h",
+    "Stop sign at intersection",
+    "Traffic cone - road marking",
+    "Flagman present at loading area",
+    "Radio communication required"
+  ],
+  "access_infra": [
+    "Main haul road - gravel surface",
+    "Pit ramp - 10% gradient",
+    "Safety berm - 1.5m height",
+    "Drainage culvert",
+    "Emergency assembly point signage"
+  ],
   "environment": {
     "composition": "metal structure",
     "type": "artificial",
