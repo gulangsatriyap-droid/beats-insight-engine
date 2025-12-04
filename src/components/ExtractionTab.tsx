@@ -1,155 +1,387 @@
 import { useState } from "react";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Copy, ChevronDown, ChevronRight, Image, Layers, Users, Car, TreePine } from "lucide-react";
 import { toast } from "sonner";
 
 const extractionData = {
-  "image_category": {
+  "image_properties": {
     "scale": "normal",
-    "source": "handheld_hp_portable_begesit",
-    "quality": {
-      "exposure_condition": "normal",
-      "low_light_level": "none",
-      "motion_blur_level": "mild",
-      "noise_level": "none",
-      "quality_notes": "Detail pekerja dan unit masih terbaca. Motion blur ringan membuat detail tangan kurang tajam."
-    }
+    "source": "Handheld",
+    "lighting": "Daylight",
+    "image_quality": "Clear"
   },
-  "need_additional_information": false,
-  "recommended_additional_information": [],
-  "ie_strategy": "Fokus pada people/ppe dan hubungan pekerja dengan alat lift. Analisis mikro masih memungkinkan, namun detail HP/seatbelt kurang pasti karena blur ringan.",
-  "information_extraction": {
-    "composition": {
-      "central_object": {
-        "name": "boom arm excavator",
-        "shape": "lengan logam memanjang dengan attachment di ujungnya",
-        "material": "metal",
-        "estimated_size": "besar (≈3–4 m)",
-        "contextual_function": "komponen utama proses lifting/pergerakan material"
-      },
-      "surrounding_objects": [
-        "lifting sling",
-        "chain hook",
-        "toolbox kecil",
-        "drum plastik biru",
-        "platform kerja dengan railing",
-        "kabel di lantai"
-      ],
-      "composition_interpretation": "Frame menunjukkan konteks pekerjaan maintenance/lifting. Ada beberapa pekerja dekat zona pergerakan boom arm. Area berisi objek-objek kecil yang menciptakan ruang kerja agak padat."
+  "composition": {
+    "central_object": {
+      "name": "pipe",
+      "shape": "cylinder",
+      "material": "steel",
+      "estimated_size": "medium"
     },
-    "people_ppe": {
-      "person_count": 3,
-      "people_distribution": "small_group",
-      "ppe_equipment": {
-        "helm": {
-          "status": "terdeteksi",
-          "colors": ["kuning", "putih"]
-        },
-        "hi_vis_vest": {
-          "status": "terdeteksi",
-          "pattern": "strip reflektif terlihat"
-        },
-        "pakaian_kerja": {
-          "lengan": "panjang",
-          "warna": "oranye dan biru"
-        },
-        "sarung_tangan": "tidak_jelas",
-        "safety_boots": "terlihat dipakai",
-        "fall_protection": {
-          "harness": "tidak_terlihat",
-          "lanyard": "tidak_terlihat"
-        },
-        "apd_khusus": []
+    "surrounding_objects": ["hammer", "chisel", "metal structure"],
+    "activities": ["working on pipe"],
+    "relationships": ["person working on pipe with hammer and chisel"],
+    "area_condition": "Not visible"
+  },
+  "people_ppe": {
+    "person_count": 1,
+    "activities": ["working"],
+    "ppe_equipment": {
+      "safety_helmet": {
+        "detected": true,
+        "color": "white",
+        "properly_worn": true,
+        "description": "safety helmet"
       },
-      "behavior_and_body_position": {
-        "body_positions": [
-          "dua pekerja berdiri di dekat boom arm",
-          "satu pekerja membungkuk sedikit memeriksa sling"
-        ],
-        "hand_activity": [
-          "pekerja kiri memegang sling",
-          "pekerja kanan tampak memegang alat kecil (tidak jelas)"
-        ],
-        "orientation": [
-          "sebagian menghadap ke boom arm",
-          "satu pekerja menghadap samping"
-        ],
-        "location_context": [
-          "semua berada di platform kerja",
-          "radius dekat area lifting"
-        ]
+      "safety_glass": {
+        "detected": false,
+        "color": "Not visible",
+        "properly_worn": false,
+        "description": "safety glass"
+      },
+      "reflective_vest": {
+        "detected": true,
+        "color": "orange",
+        "properly_worn": true,
+        "description": "reflective vest"
+      },
+      "gloves": {
+        "detected": false,
+        "color": "Not visible",
+        "properly_worn": false,
+        "description": "gloves"
+      },
+      "safety_boots": {
+        "detected": true,
+        "color": "brown",
+        "properly_worn": true,
+        "description": "safety boots"
+      },
+      "safety_harness": {
+        "detected": false,
+        "color": "Not visible",
+        "properly_worn": false,
+        "description": "safety harness"
+      },
+      "respiratory_mask": {
+        "detected": false,
+        "color": "Not visible",
+        "properly_worn": false,
+        "description": "respiratory mask"
+      },
+      "earplugs": {
+        "detected": false,
+        "color": "Not visible",
+        "properly_worn": false,
+        "description": "earplugs"
       }
     },
-    "vehicles": {
-      "vehicle_types": ["excavator"],
-      "vehicle_attributes": [
-        {
-          "type": "excavator",
-          "lampu": "tidak_jelas",
-          "beacon": "tidak_terlihat",
-          "buggy_whip": "tidak_ada",
-          "posisi_lajur": "tidak_relevan (area kerja statis)",
-          "arah_hadap": "menyamping"
-        }
-      ],
-      "vehicle_operational_status": "maintenance_or_repair"
-    },
-    "traffic_control": {
-      "traffic_signs": [],
-      "barriers_and_road_infrastructure": [
-        "cone oranye (1)",
-        "water barrier putih (di belakang area)"
-      ],
-      "key_geographical_elements": []
-    },
-    "access_infra": {
-      "access_types": ["platform_kerja", "railing", "tangga_logam"],
-      "access_condition": "aman (railing utuh, akses tidak terhalang)"
-    },
-    "environment": {
-      "surface_condition": "kering dan padat",
-      "water_proximity": [],
-      "geotechnical_indicators": [],
-      "spatial_composition": {
-        "field_of_view": "sedang",
-        "clutter_level": "mixed",
-        "hazard_spatial_relation": [
-          "pekerja berada dekat boom arm yang sedang diatur posisinya",
-          "platform cukup sempit dengan beberapa objek di lantai"
-        ]
-      }
-    }
+    "people_relationships": ["person working alone"],
+    "hazard_potential": ["struck by hammer", "struck by chisel", "falling objects"]
+  },
+  "vehicles": [],
+  "traffic_control": [],
+  "access_infra": [],
+  "environment": {
+    "composition": "metal structure",
+    "type": "artificial",
+    "condition": "dry",
+    "size": "small"
   }
 };
 
-const SectionTable = ({ title, rows }: { title: string; rows: { field: string; value: any }[] }) => (
-  <div className="mb-6">
-    <h4 className="text-sm font-semibold text-foreground mb-3 pb-2 border-b border-border">{title}</h4>
-    <Table>
-      <TableBody>
-        {rows.map((row, idx) => (
-          <TableRow key={idx} className="border-border hover:bg-muted/30">
-            <TableCell className="text-xs py-2.5 font-medium text-muted-foreground w-1/3">{row.field}</TableCell>
-            <TableCell className="text-xs py-2.5 text-foreground">
-              {Array.isArray(row.value) ? (
-                row.value.length > 0 ? row.value.join("; ") : <span className="text-muted-foreground italic">(kosong)</span>
-              ) : row.value === null || row.value === undefined || row.value === "" ? (
-                <span className="text-muted-foreground italic">(kosong)</span>
-              ) : typeof row.value === "object" ? (
-                JSON.stringify(row.value)
-              ) : (
-                String(row.value)
-              )}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </div>
-);
+// Helper component for rendering key-value pairs
+const KeyValueRow = ({ label, value, indent = 0 }: { label: string; value: any; indent?: number }) => {
+  const paddingLeft = indent * 16;
+  
+  if (value === null || value === undefined || value === "") {
+    return (
+      <div className="flex py-2 border-b border-border/50 last:border-b-0" style={{ paddingLeft }}>
+        <span className="text-xs font-medium text-muted-foreground w-2/5 capitalize">{label.replace(/_/g, ' ')}</span>
+        <span className="text-xs text-muted-foreground italic">(kosong)</span>
+      </div>
+    );
+  }
+
+  if (Array.isArray(value)) {
+    if (value.length === 0) {
+      return (
+        <div className="flex py-2 border-b border-border/50 last:border-b-0" style={{ paddingLeft }}>
+          <span className="text-xs font-medium text-muted-foreground w-2/5 capitalize">{label.replace(/_/g, ' ')}</span>
+          <span className="text-xs text-muted-foreground italic">(kosong)</span>
+        </div>
+      );
+    }
+    return (
+      <div className="py-2 border-b border-border/50 last:border-b-0" style={{ paddingLeft }}>
+        <span className="text-xs font-medium text-muted-foreground capitalize">{label.replace(/_/g, ' ')}</span>
+        <ul className="mt-1.5 ml-4 space-y-1">
+          {value.map((item, idx) => (
+            <li key={idx} className="text-xs text-foreground flex items-start gap-2">
+              <span className="text-muted-foreground">•</span>
+              <span>{typeof item === 'object' ? JSON.stringify(item) : String(item)}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  if (typeof value === 'object') {
+    return (
+      <div className="py-2 border-b border-border/50 last:border-b-0" style={{ paddingLeft }}>
+        <span className="text-xs font-medium text-muted-foreground capitalize mb-2 block">{label.replace(/_/g, ' ')}</span>
+        <div className="ml-4 bg-muted/30 rounded-md p-2">
+          {Object.entries(value).map(([k, v]) => (
+            <KeyValueRow key={k} label={k} value={v} indent={0} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (typeof value === 'boolean') {
+    return (
+      <div className="flex py-2 border-b border-border/50 last:border-b-0" style={{ paddingLeft }}>
+        <span className="text-xs font-medium text-muted-foreground w-2/5 capitalize">{label.replace(/_/g, ' ')}</span>
+        <span className={`text-xs font-medium ${value ? 'text-success' : 'text-muted-foreground'}`}>
+          {value ? 'Yes' : 'No'}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex py-2 border-b border-border/50 last:border-b-0" style={{ paddingLeft }}>
+      <span className="text-xs font-medium text-muted-foreground w-2/5 capitalize">{label.replace(/_/g, ' ')}</span>
+      <span className="text-xs text-foreground">{String(value)}</span>
+    </div>
+  );
+};
+
+// Collapsible section component
+const CollapsibleSection = ({ 
+  title, 
+  icon: Icon, 
+  data, 
+  defaultOpen = false 
+}: { 
+  title: string; 
+  icon: React.ElementType; 
+  data: Record<string, any>; 
+  defaultOpen?: boolean;
+}) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const isEmpty = Object.keys(data).length === 0 || 
+    (Array.isArray(data) && data.length === 0);
+
+  return (
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <CollapsibleTrigger className="w-full">
+        <div className="flex items-center justify-between p-3 bg-muted/50 hover:bg-muted/70 rounded-lg transition-colors">
+          <div className="flex items-center gap-3">
+            <div className="p-1.5 bg-primary/10 rounded">
+              <Icon className="h-4 w-4 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-foreground">{title}</span>
+            {isEmpty && (
+              <span className="text-xs text-muted-foreground italic">(tidak ada data)</span>
+            )}
+          </div>
+          {isOpen ? (
+            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+          ) : (
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          )}
+        </div>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className="p-4 border border-t-0 border-border rounded-b-lg bg-card">
+          {isEmpty ? (
+            <p className="text-xs text-muted-foreground italic text-center py-4">Tidak ada data untuk ditampilkan</p>
+          ) : (
+            <div className="space-y-0">
+              {Object.entries(data).map(([key, value]) => (
+                <KeyValueRow key={key} label={key} value={value} />
+              ))}
+            </div>
+          )}
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  );
+};
+
+// PPE Equipment section with special rendering
+const PPESection = ({ data }: { data: typeof extractionData.people_ppe }) => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <CollapsibleTrigger className="w-full">
+        <div className="flex items-center justify-between p-3 bg-muted/50 hover:bg-muted/70 rounded-lg transition-colors">
+          <div className="flex items-center gap-3">
+            <div className="p-1.5 bg-primary/10 rounded">
+              <Users className="h-4 w-4 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-foreground">People & PPE</span>
+          </div>
+          {isOpen ? (
+            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+          ) : (
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          )}
+        </div>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className="p-4 border border-t-0 border-border rounded-b-lg bg-card space-y-4">
+          {/* Basic Info */}
+          <div>
+            <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Info Dasar</h5>
+            <div className="space-y-0">
+              <KeyValueRow label="Person Count" value={data.person_count} />
+              <KeyValueRow label="Activities" value={data.activities} />
+              <KeyValueRow label="People Relationships" value={data.people_relationships} />
+              <KeyValueRow label="Hazard Potential" value={data.hazard_potential} />
+            </div>
+          </div>
+
+          {/* PPE Equipment Grid */}
+          <div>
+            <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">PPE Equipment</h5>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {Object.entries(data.ppe_equipment).map(([key, ppe]) => (
+                <div 
+                  key={key} 
+                  className={`p-3 rounded-lg border ${
+                    ppe.detected 
+                      ? 'bg-success/5 border-success/30' 
+                      : 'bg-muted/30 border-border'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-medium capitalize">{key.replace(/_/g, ' ')}</span>
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
+                      ppe.detected 
+                        ? 'bg-success/20 text-success' 
+                        : 'bg-muted text-muted-foreground'
+                    }`}>
+                      {ppe.detected ? 'Detected' : 'Not Detected'}
+                    </span>
+                  </div>
+                  {ppe.detected && (
+                    <div className="space-y-1 text-xs text-muted-foreground">
+                      <div className="flex justify-between">
+                        <span>Color:</span>
+                        <span className="text-foreground">{ppe.color}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Properly Worn:</span>
+                        <span className={ppe.properly_worn ? 'text-success' : 'text-warning'}>
+                          {ppe.properly_worn ? 'Yes' : 'No'}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  );
+};
+
+// Combined Vehicles/Traffic/Access section
+const VehiclesTrafficAccessSection = ({ 
+  vehicles, 
+  trafficControl, 
+  accessInfra 
+}: { 
+  vehicles: any[]; 
+  trafficControl: any[]; 
+  accessInfra: any[];
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const isEmpty = vehicles.length === 0 && trafficControl.length === 0 && accessInfra.length === 0;
+
+  return (
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <CollapsibleTrigger className="w-full">
+        <div className="flex items-center justify-between p-3 bg-muted/50 hover:bg-muted/70 rounded-lg transition-colors">
+          <div className="flex items-center gap-3">
+            <div className="p-1.5 bg-primary/10 rounded">
+              <Car className="h-4 w-4 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-foreground">Vehicles / Traffic Control / Access Infra</span>
+            {isEmpty && (
+              <span className="text-xs text-muted-foreground italic">(tidak ada data)</span>
+            )}
+          </div>
+          {isOpen ? (
+            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+          ) : (
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          )}
+        </div>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className="p-4 border border-t-0 border-border rounded-b-lg bg-card space-y-4">
+          {/* Vehicles */}
+          <div>
+            <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Vehicles</h5>
+            {vehicles.length === 0 ? (
+              <p className="text-xs text-muted-foreground italic">Tidak ada kendaraan terdeteksi</p>
+            ) : (
+              <div className="space-y-2">
+                {vehicles.map((v, idx) => (
+                  <div key={idx} className="p-2 bg-muted/30 rounded text-xs">
+                    {typeof v === 'object' ? JSON.stringify(v) : String(v)}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Traffic Control */}
+          <div>
+            <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Traffic Control</h5>
+            {trafficControl.length === 0 ? (
+              <p className="text-xs text-muted-foreground italic">Tidak ada traffic control terdeteksi</p>
+            ) : (
+              <div className="space-y-2">
+                {trafficControl.map((t, idx) => (
+                  <div key={idx} className="p-2 bg-muted/30 rounded text-xs">
+                    {typeof t === 'object' ? JSON.stringify(t) : String(t)}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Access Infrastructure */}
+          <div>
+            <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Access Infrastructure</h5>
+            {accessInfra.length === 0 ? (
+              <p className="text-xs text-muted-foreground italic">Tidak ada access infrastructure terdeteksi</p>
+            ) : (
+              <div className="space-y-2">
+                {accessInfra.map((a, idx) => (
+                  <div key={idx} className="p-2 bg-muted/30 rounded text-xs">
+                    {typeof a === 'object' ? JSON.stringify(a) : String(a)}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  );
+};
 
 export const ExtractionTab = () => {
   const [viewMode, setViewMode] = useState<"table" | "json">("table");
@@ -159,102 +391,12 @@ export const ExtractionTab = () => {
     toast.success("JSON copied to clipboard");
   };
 
-  const tableViewSections = [
-    {
-      title: "Image Category",
-      rows: [
-        { field: "Scale", value: extractionData.image_category.scale },
-        { field: "Source", value: extractionData.image_category.source },
-        { field: "Exposure", value: extractionData.image_category.quality.exposure_condition },
-        { field: "Low light", value: extractionData.image_category.quality.low_light_level },
-        { field: "Motion blur", value: extractionData.image_category.quality.motion_blur_level },
-        { field: "Noise", value: extractionData.image_category.quality.noise_level },
-        { field: "Quality notes", value: extractionData.image_category.quality.quality_notes },
-      ]
-    },
-    {
-      title: "Analysis Strategy",
-      rows: [
-        { field: "Need additional information", value: String(extractionData.need_additional_information) },
-        { field: "Recommended additional information", value: extractionData.recommended_additional_information },
-        { field: "IE Strategy", value: extractionData.ie_strategy },
-      ]
-    },
-    {
-      title: "Composition",
-      rows: [
-        { field: "Central object – name", value: extractionData.information_extraction.composition.central_object.name },
-        { field: "Central object – shape", value: extractionData.information_extraction.composition.central_object.shape },
-        { field: "Central object – material", value: extractionData.information_extraction.composition.central_object.material },
-        { field: "Central object – estimated size", value: extractionData.information_extraction.composition.central_object.estimated_size },
-        { field: "Central object – function", value: extractionData.information_extraction.composition.central_object.contextual_function },
-        { field: "Surrounding objects", value: extractionData.information_extraction.composition.surrounding_objects },
-        { field: "Composition interpretation", value: extractionData.information_extraction.composition.composition_interpretation },
-      ]
-    },
-    {
-      title: "People / PPE",
-      rows: [
-        { field: "Person count", value: extractionData.information_extraction.people_ppe.person_count },
-        { field: "People distribution", value: extractionData.information_extraction.people_ppe.people_distribution },
-        { field: "Helm", value: `${extractionData.information_extraction.people_ppe.ppe_equipment.helm.status} (${extractionData.information_extraction.people_ppe.ppe_equipment.helm.colors.join(", ")})` },
-        { field: "Hi-vis vest", value: `${extractionData.information_extraction.people_ppe.ppe_equipment.hi_vis_vest.status}, ${extractionData.information_extraction.people_ppe.ppe_equipment.hi_vis_vest.pattern}` },
-        { field: "Pakaian kerja", value: `${extractionData.information_extraction.people_ppe.ppe_equipment.pakaian_kerja.lengan}, ${extractionData.information_extraction.people_ppe.ppe_equipment.pakaian_kerja.warna}` },
-        { field: "Sarung tangan", value: extractionData.information_extraction.people_ppe.ppe_equipment.sarung_tangan },
-        { field: "Safety boots", value: extractionData.information_extraction.people_ppe.ppe_equipment.safety_boots },
-        { field: "Fall protection – harness", value: extractionData.information_extraction.people_ppe.ppe_equipment.fall_protection.harness },
-        { field: "Fall protection – lanyard", value: extractionData.information_extraction.people_ppe.ppe_equipment.fall_protection.lanyard },
-        { field: "APD khusus", value: extractionData.information_extraction.people_ppe.ppe_equipment.apd_khusus },
-        { field: "Body positions", value: extractionData.information_extraction.people_ppe.behavior_and_body_position.body_positions },
-        { field: "Hand activity", value: extractionData.information_extraction.people_ppe.behavior_and_body_position.hand_activity },
-        { field: "Orientation", value: extractionData.information_extraction.people_ppe.behavior_and_body_position.orientation },
-        { field: "Location context", value: extractionData.information_extraction.people_ppe.behavior_and_body_position.location_context },
-      ]
-    },
-    {
-      title: "Vehicles",
-      rows: [
-        { field: "Vehicle types", value: extractionData.information_extraction.vehicles.vehicle_types },
-        { field: "Vehicle attributes", value: extractionData.information_extraction.vehicles.vehicle_attributes.map(v => 
-          `type: ${v.type}; lampu: ${v.lampu}; beacon: ${v.beacon}; buggy_whip: ${v.buggy_whip}; posisi_lajur: ${v.posisi_lajur}; arah_hadap: ${v.arah_hadap}`
-        ).join(" | ") },
-        { field: "Vehicle operational status", value: extractionData.information_extraction.vehicles.vehicle_operational_status },
-      ]
-    },
-    {
-      title: "Traffic Control",
-      rows: [
-        { field: "Traffic signs", value: extractionData.information_extraction.traffic_control.traffic_signs },
-        { field: "Barriers & road infrastructure", value: extractionData.information_extraction.traffic_control.barriers_and_road_infrastructure },
-        { field: "Key geographical elements", value: extractionData.information_extraction.traffic_control.key_geographical_elements },
-      ]
-    },
-    {
-      title: "Access & Infrastructure",
-      rows: [
-        { field: "Access types", value: extractionData.information_extraction.access_infra.access_types },
-        { field: "Access condition", value: extractionData.information_extraction.access_infra.access_condition },
-      ]
-    },
-    {
-      title: "Environment",
-      rows: [
-        { field: "Surface condition", value: extractionData.information_extraction.environment.surface_condition },
-        { field: "Water proximity", value: extractionData.information_extraction.environment.water_proximity },
-        { field: "Geotechnical indicators", value: extractionData.information_extraction.environment.geotechnical_indicators },
-        { field: "Field of view", value: extractionData.information_extraction.environment.spatial_composition.field_of_view },
-        { field: "Clutter level", value: extractionData.information_extraction.environment.spatial_composition.clutter_level },
-        { field: "Hazard spatial relation", value: extractionData.information_extraction.environment.spatial_composition.hazard_spatial_relation },
-      ]
-    }
-  ];
-
   return (
     <div className="space-y-4">
       {/* Header Bar */}
       <div className="flex items-start justify-between pb-3 border-b border-border">
         <div>
-          <h3 className="text-sm font-semibold text-foreground">Extraction Result</h3>
+          <h3 className="text-sm font-semibold text-foreground">Information Extraction</h3>
           <p className="text-xs text-muted-foreground mt-1">Source: Extraction engine v1</p>
         </div>
         <div className="flex items-center gap-2">
@@ -272,12 +414,42 @@ export const ExtractionTab = () => {
       </div>
 
       {/* Content Area */}
-      <Card className="p-6 bg-card border-border shadow-sm">
+      <Card className="p-4 bg-card border-border shadow-sm">
         {viewMode === "table" ? (
-          <div className="space-y-6">
-            {tableViewSections.map((section, idx) => (
-              <SectionTable key={idx} title={section.title} rows={section.rows} />
-            ))}
+          <div className="space-y-3">
+            {/* Image Properties */}
+            <CollapsibleSection 
+              title="Image Properties" 
+              icon={Image} 
+              data={extractionData.image_properties}
+              defaultOpen={true}
+            />
+
+            {/* Composition */}
+            <CollapsibleSection 
+              title="Composition" 
+              icon={Layers} 
+              data={extractionData.composition}
+              defaultOpen={true}
+            />
+
+            {/* People & PPE - Special rendering */}
+            <PPESection data={extractionData.people_ppe} />
+
+            {/* Vehicles / Traffic Control / Access Infra - Combined */}
+            <VehiclesTrafficAccessSection 
+              vehicles={extractionData.vehicles}
+              trafficControl={extractionData.traffic_control}
+              accessInfra={extractionData.access_infra}
+            />
+
+            {/* Environment */}
+            <CollapsibleSection 
+              title="Environment" 
+              icon={TreePine} 
+              data={extractionData.environment}
+              defaultOpen={false}
+            />
           </div>
         ) : (
           <div>
